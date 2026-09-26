@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django - Bodega</title>
+    <link rel="stylesheet" href="{% static 'css\bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 10rem;">
+                    <img src="{% static 'images/usuario.png' %}" class="card-img-top" 
+                        alt="foto de {{ nombre }} {{ apellidos }}">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ nombre }} {{ apellidos }}</h5>
+                      <p class="card-text">
+                        <li>{{ correo }}</li>
+                        {% if cargo == 'bodeguero' %}
+                        <li>{{ cargo }}</li>
+                        {% else %}
+                        <li>Sin cargo</li>
+                        {% endif %}
+                      </p>
+
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <a href="{% url 'home_bodega' %}">Home</a>
+    <script src="{% static 'js\bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

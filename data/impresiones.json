@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "nombre": "Figuras de mascotas a pedido",
+        "material": "Pintado a mano, tomando en cuenta cada detalle",
+        "precio": 25000,
+        "descripcion": "Puedes inmortalizar a tus regalones conmmigo",
+        "imagen": "images/impresion1.jpeg"
+    },
+    {
+        "id": 2,
+        "nombre": "Pikachu-viejasapa",
+        "material": "Pintado a mano",
+        "precio": 20000,
+        "descripcion": "Ideal para decoracion y sapear a tus vecinos.",
+        "imagen": "images/impresion2.jpeg"
+    },
+    {
+        "id": 3,
+        "nombre": "Figuras a pedido",
+        "material": "Depende del pedido",
+        "precio": "A tratar",
+        "descripcion": "Puedes pedirme tus personajes de animes, series, videojuegos, cantantes o lo que quieras",
+        "imagen": "images/impresion3.jpeg"
+    }
+]

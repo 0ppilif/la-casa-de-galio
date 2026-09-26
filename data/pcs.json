@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "nombre": "PC Gamer Completo",
+        "procesador": "Intel Xeon E5-2689",
+        "gpu": "RX 580",
+        "ram": "32GB",
+        "precio": 450000,
+        "monitor": "Monitor de 24 pulgadas 60hz",
+        "perifericos": "Si",
+        "descripcion": "Ideal para juegos competitivos y multitarea",
+        "imagen": "images/pc1.jpeg"
+    },
+    {
+        "id": 2,
+        "nombre": "PC Gamer (solo torre)",
+        "procesador": "Intel Xeon E5-2420",
+        "gpu": "GTX 1050 ti",
+        "ram": "16GB",
+        "precio": 250000,
+        "monitor": "No",
+        "perifericos": "No",
+        "descripcion": "Buen rendimiento en juegos competitivos",
+        "imagen": "images/pc2.jpeg" 
+    }
+]

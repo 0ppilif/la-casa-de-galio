@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Los PC's de Galio - Catálogo{% endblock %}
+
+{% block content %}
+<!-- ESTILOS PARA EL FONDO DE PANTALLA -->
+<style>
+    body {
+        /* Asegúrate de que el nombre de la imagen coincida con la que guardaste */
+        background-image: url("{% static 'images/fondo_galio.jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+    }
+    .titulo-fondo {
+        background-color: rgba(248, 249, 250, 0.85) !important;
+        padding: 15px 30px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12 text-center mb-4">
+        <!-- Caja semi-transparente para que el título se lea bien -->
+        <div class="titulo-fondo shadow-sm">
+            <h2>Catálogo de Los PC's de Galio</h2>
+            <p class="lead mb-0">Venta de equipos y servicios técnicos</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Aquí iteramos sobre el JSON que mandamos desde la vista de la tienda -->
+    {% for pc in catalogo_pcs %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <!-- Cargamos la imagen dinámica desde el JSON -->
+            <img src="{% static pc.imagen %}" class="card-img-top" alt="{{ pc.nombre }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ pc.nombre }}</h5>
+                <h6 class="text-primary">${{ pc.precio }}</h6>
+                <p class="card-text">{{ pc.descripcion }}</p>
+                <ul class="list-unstyled mt-3">
+                    <li><strong>Procesador:</strong> {{ pc.procesador }}</li>
+                    <li><strong>Tarjeta Gráfica:</strong> {{ pc.gpu }}</li>
+                    <li><strong>Monitor:</strong> {{ pc.monitor }}</li>
+                    <li><strong>Periféricos:</strong> {{ pc.perifericos }}</li>
+                    <li><strong>RAM:</strong> {{ pc.ram }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

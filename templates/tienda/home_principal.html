@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}La Casa de Galio - Bienvenidos{% endblock %}
+
+{% block content %}
+<!-- ESTILOS PARA EL FONDO DE PANTALLA -->
+<style>
+    body {
+        /* OJO: Cambia 'fondo_galio.jpg' por el nombre exacto de la imagen que guardaste */
+        background-image: url("{% static 'images/fondo_galio.jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+    }
+
+    /* Le damos una ligera transparencia al recuadro blanco de bienvenida 
+       para que el texto se lea perfecto, pero deje lucir tu fondo */
+    .bg-light {
+        background-color: rgba(248, 249, 250, 0.85) !important;
+    }
+</style>
+
+<!-- Sección de Bienvenida -->
+<div class="p-5 mb-4 bg-light rounded-3 text-center shadow-sm">
+    <div class="container-fluid py-3">
+        <h1 class="display-5 fw-bold">Bienvenidos a La Casa de Galio</h1>
+        <p class="col-md-8 mx-auto fs-5 mt-3">Tu lugar de confianza para armar el PC de tus sueños y traer tus ideas a la realidad con nuestras impresiones 3D a pedido.</p>
+    </div>
+</div>
+
+<!-- Vista Previa de Productos cargados desde JSON -->
+<div class="row mt-5">
+    <!-- Le agregamos un fondo oscuro o claro al título para que no se pierda con la imagen -->
+    <h3 class="mb-4 text-center text-white text-shadow">Vista Previa de Productos</h3>
+    
+    <!-- Columna PCs -->
+    <div class="col-md-6 mb-4">
+        <div class="p-3 bg-white rounded shadow-sm opacity-100">
+            <h4 class="text-primary mb-3">Los PC's de Galio</h4>
+            <div class="list-group">
+                {% for pc in preview_pcs %}
+                <div class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ pc.nombre }}</h5>
+                        <small class="text-muted">${{ pc.precio }}</small>
+                    </div>
+                    <p class="mb-1">{{ pc.descripcion }}</p>
+                    <small>CPU: {{ pc.procesador }} | RAM: {{ pc.ram }}</small>
+                </div>
+                {% endfor %}
+            </div>
+            <a href="{% url 'home_tienda' %}" class="btn btn-outline-primary mt-3 w-100">Ver catálogo completo de los PCs</a>
+        </div>
+    </div>
+
+    <!-- Columna Impresiones -->
+    <div class="col-md-6 mb-4">
+        <div class="p-3 bg-white rounded shadow-sm opacity-100">
+            <h4 class="text-success mb-3">Las Impresiones 3D</h4>
+            <div class="list-group">
+                {% for figura in preview_impresiones %}
+                <div class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ figura.nombre }}</h5>
+                        <small class="text-muted">${{ figura.precio }}</small>
+                    </div>
+                    <p class="mb-1">{{ figura.descripcion }}</p>
+                    <small>Material: {{ figura.material }}</small>
+                </div>
+                {% endfor %}
+            </div>
+            <a href="{% url 'home_bodega' %}" class="btn btn-outline-success mt-3 w-100">Ver catálogo completo de las impresiones 3D</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

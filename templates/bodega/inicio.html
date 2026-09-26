@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Impresiones 3D - Catálogo{% endblock %}
+
+{% block content %}
+<!-- ESTILOS PARA EL FONDO DE PANTALLA -->
+<style>
+    body {
+        /* Asegúrate de que el nombre de la imagen coincida con la que guardaste */
+        background-image: url("{% static 'images/fondo_galio.jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+    }
+    .titulo-fondo {
+        background-color: rgba(248, 249, 250, 0.85) !important;
+        padding: 15px 30px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12 text-center mb-4">
+        <!-- Caja semi-transparente para que el título se lea bien -->
+        <div class="titulo-fondo shadow-sm">
+            <h2>Impresiones 3D de Galio</h2>
+            <p class="lead mb-0">Impresiones 3D a la venta y pedidos personalizados</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Iteramos sobre el JSON que mandamos desde la vista de bodega -->
+    {% for figura in catalogo_impresiones %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <!-- Cargamos la imagen dinámica desde el JSON -->
+            <img src="{% static figura.imagen %}" class="card-img-top" alt="{{ figura.nombre }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ figura.nombre }}</h5>
+                <h6 class="text-success">${{ figura.precio }}</h6>
+                <p class="card-text">{{ figura.descripcion }}</p>
+                <ul class="list-unstyled mt-3">
+                    <li><strong>Pintado:</strong> {{ figura.material }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

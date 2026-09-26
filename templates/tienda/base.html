@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django - Principal</title>
+    <link rel="stylesheet" href="{% static 'css\bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+    <!-- Inicio de la cabecera -->
+    {% block cabecera %}
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-primary h2">
+                    Este es el bloque de la cabecera
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    <!-- Fin de la cabecera -->
+      
+    <!-- Inicio de la menu -->
+    {% block menu %}
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-success h2">
+                    Este es el bloque de la menu
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    <!-- Fin de la menu -->
+
+    <!-- Inicio de la contenido -->
+    {% block contenido %}
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info h2">
+                    Este es el bloque de la contenido
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    <!-- Fin de la contenido -->
+
+        <!-- Inicio de la footer -->
+    {% block footer %}
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-warning h2">
+                    Este es el bloque de la footer
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    <!-- Fin de la footer -->
+
+        <!-- Inicio de la js -->
+    {% block js %}
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-danger h2">
+                    Este es el bloque de la js
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    <!-- Fin de la js -->
+    </div>
+    <script src="{% static 'js\bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>
