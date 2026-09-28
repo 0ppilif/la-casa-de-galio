@@ -1,19 +1,25 @@
-from pathlib import Path
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Construir rutas dentro del proyecto
 BASE_DIR = Path(__file__).resolve().parent.parent
-# Creando una constante para llegar a los html
-TEMPLATES_DIR = os.path.join(BASE_DIR,'templates')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
+# ¡Agrega esta línea para que Django encuentre tus HTML!
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-frf39cre5v7r4%#19nj56j@466=zih$d&yn#utxtp(vm&twkm*'
+# Cargar las variables del archivo .env
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+# Cargar las variables del archivo .env
+load_dotenv(os.path.join(BASE_DIR, '.env'))
+
+# Leer la clave secreta desde el .env
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+# Leer el modo debug desde el .env (retorna True si el texto es 'True')
+DEBUG = os.getenv('DEBUG') == 'True'
 
 ALLOWED_HOSTS = []
 

@@ -1,45 +1,29 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-import json
-import os
-from django.conf import settings
+# Importamos los modelos de la base de datos
+from .models import Computador
+from bodegaApp.models import Figura3D
 
-# 1. NUEVA VISTA: Bienvenida Global y Vista Previa
+# VISTA GLOBAL
 def inicio_principal(request):
-    # Definimos las rutas a los archivos JSON
-    ruta_pcs = os.path.join(settings.BASE_DIR, 'data', 'pcs.json')
-    ruta_impresiones = os.path.join(settings.BASE_DIR, 'data', 'impresiones.json')
+    # Consultas ORM: Obtenemos los primeros 2 registros de la BD
+    preview_pcs = Computador.objects.all()[:2]
+    preview_impresiones = Figura3D.objects.all()[:2]
     
-    # Leemos los archivos
-    with open(ruta_pcs, 'r', encoding='utf-8') as f:
-        pcs = json.load(f)
-        
-    with open(ruta_impresiones, 'r', encoding='utf-8') as f:
-        impresiones = json.load(f)
-        
-    # Pasamos los datos al contexto (solo los 2 primeros elementos para la vista previa)
     contexto = {
-        'preview_pcs': pcs[:2], 
-        'preview_impresiones': impresiones[:2]
+        'preview_pcs': preview_pcs, 
+        'preview_impresiones': preview_impresiones
     }
-    
     return render(request, 'tienda/home_principal.html', contexto)
 
-
-# 2. VISTA MODIFICADA: Catálogo completo de Los PC's de Galio
+# VISTA CATÁLOGO PC
 def inicio(request):
-    # Ahora lee los datos reales desde el JSON en lugar de datos estáticos
-    ruta_pcs = os.path.join(settings.BASE_DIR, 'data', 'pcs.json')
-    
-    with open(ruta_pcs, 'r', encoding='utf-8') as f:
-        pcs = json.load(f)
-        
+    # Consulta ORM: Obtenemos todos los PCs
+    pcs = Computador.objects.all()
     data = {
         "catalogo_pcs": pcs
     }
     return render(request, 'tienda/inicio.html', data)
 
-
-# 3. VISTA INVENTARIO (Se mantiene tu código original de clases)
 def inventario(request):
     return HttpResponse("<h1>Mi inventario con Django</h1>")

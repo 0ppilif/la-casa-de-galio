@@ -4,10 +4,8 @@
 {% block title %}Los PC's de Galio - Catálogo{% endblock %}
 
 {% block content %}
-<!-- ESTILOS PARA EL FONDO DE PANTALLA -->
 <style>
     body {
-        /* Asegúrate de que el nombre de la imagen coincida con la que guardaste */
         background-image: url("{% static 'images/fondo_galio.jpg' %}");
         background-size: cover;
         background-repeat: no-repeat;
@@ -24,7 +22,6 @@
 
 <div class="row">
     <div class="col-md-12 text-center mb-4">
-        <!-- Caja semi-transparente para que el título se lea bien -->
         <div class="titulo-fondo shadow-sm">
             <h2>Catálogo de Los PC's de Galio</h2>
             <p class="lead mb-0">Venta de equipos y servicios técnicos</p>
@@ -32,24 +29,40 @@
     </div>
 </div>
 
+<!-- Barra de Herramientas (Buscar y Agregar) -->
+<div class="row mb-4">
+    <div class="col-md-8">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Buscar PC...">
+            <button class="btn btn-primary" type="button">Buscar</button>
+        </div>
+    </div>
+    <div class="col-md-4 text-end">
+        <button class="btn btn-success w-100">Agregar Nuevo PC</button>
+    </div>
+</div>
+
 <div class="row">
-    <!-- Aquí iteramos sobre el JSON que mandamos desde la vista de la tienda -->
     {% for pc in catalogo_pcs %}
     <div class="col-md-4 mb-4">
         <div class="card h-100 shadow-sm">
-            <!-- Cargamos la imagen dinámica desde el JSON -->
             <img src="{% static pc.imagen %}" class="card-img-top" alt="{{ pc.nombre }}">
-            <div class="card-body">
+            <div class="card-body d-flex flex-column">
                 <h5 class="card-title">{{ pc.nombre }}</h5>
+                <!-- Aquí leemos la llave foránea de la categoría -->
+                <span class="badge bg-secondary mb-2">{{ pc.categoria.nombre }}</span>
                 <h6 class="text-primary">${{ pc.precio }}</h6>
                 <p class="card-text">{{ pc.descripcion }}</p>
-                <ul class="list-unstyled mt-3">
+                <ul class="list-unstyled mt-3 mb-4">
                     <li><strong>Procesador:</strong> {{ pc.procesador }}</li>
                     <li><strong>Tarjeta Gráfica:</strong> {{ pc.gpu }}</li>
-                    <li><strong>Monitor:</strong> {{ pc.monitor }}</li>
-                    <li><strong>Periféricos:</strong> {{ pc.perifericos }}</li>
                     <li><strong>RAM:</strong> {{ pc.ram }}</li>
                 </ul>
+                <!-- Botones Modificar y Eliminar al final de la tarjeta -->
+                <div class="mt-auto d-flex justify-content-between">
+                    <button class="btn btn-warning btn-sm w-45">Modificar</button>
+                    <button class="btn btn-danger btn-sm w-45">Eliminar</button>
+                </div>
             </div>
         </div>
     </div>

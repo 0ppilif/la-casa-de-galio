@@ -4,10 +4,8 @@
 {% block title %}Impresiones 3D - Catálogo{% endblock %}
 
 {% block content %}
-<!-- ESTILOS PARA EL FONDO DE PANTALLA -->
 <style>
     body {
-        /* Asegúrate de que el nombre de la imagen coincida con la que guardaste */
         background-image: url("{% static 'images/fondo_galio.jpg' %}");
         background-size: cover;
         background-repeat: no-repeat;
@@ -24,7 +22,6 @@
 
 <div class="row">
     <div class="col-md-12 text-center mb-4">
-        <!-- Caja semi-transparente para que el título se lea bien -->
         <div class="titulo-fondo shadow-sm">
             <h2>Impresiones 3D de Galio</h2>
             <p class="lead mb-0">Impresiones 3D a la venta y pedidos personalizados</p>
@@ -32,20 +29,35 @@
     </div>
 </div>
 
+<!-- Barra de Herramientas (Buscar y Agregar) -->
+<div class="row mb-4">
+    <div class="col-md-8">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Buscar Figura...">
+            <button class="btn btn-primary" type="button">Buscar</button>
+        </div>
+    </div>
+    <div class="col-md-4 text-end">
+        <button class="btn btn-success w-100">Agregar Nueva Figura</button>
+    </div>
+</div>
+
 <div class="row">
-    <!-- Iteramos sobre el JSON que mandamos desde la vista de bodega -->
     {% for figura in catalogo_impresiones %}
     <div class="col-md-4 mb-4">
         <div class="card h-100 shadow-sm">
-            <!-- Cargamos la imagen dinámica desde el JSON -->
             <img src="{% static figura.imagen %}" class="card-img-top" alt="{{ figura.nombre }}">
-            <div class="card-body">
+            <div class="card-body d-flex flex-column">
                 <h5 class="card-title">{{ figura.nombre }}</h5>
+                <!-- Leemos la llave foránea del material -->
+                <span class="badge bg-secondary mb-2">{{ figura.material.nombre }}</span>
                 <h6 class="text-success">${{ figura.precio }}</h6>
                 <p class="card-text">{{ figura.descripcion }}</p>
-                <ul class="list-unstyled mt-3">
-                    <li><strong>Pintado:</strong> {{ figura.material }}</li>
-                </ul>
+                <!-- Botones Modificar y Eliminar al final de la tarjeta -->
+                <div class="mt-auto d-flex justify-content-between pt-3">
+                    <button class="btn btn-warning btn-sm w-45">Modificar</button>
+                    <button class="btn btn-danger btn-sm w-45">Eliminar</button>
+                </div>
             </div>
         </div>
     </div>
