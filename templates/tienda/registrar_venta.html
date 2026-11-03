@@ -1,0 +1,22 @@
+{% extends 'tienda/base.html' %}
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-md-6 mt-4">
+        <div class="card shadow border-success">
+            <div class="card-header bg-success text-white text-center">
+                <h4>Registrar Venta de Equipo</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver al Panel</a>
+                        <button type="submit" class="btn btn-success">Completar Venta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

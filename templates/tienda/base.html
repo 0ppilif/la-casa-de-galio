@@ -1,76 +1,66 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django - Principal</title>
+    <title>La Casa de Galio - Panel</title>
     <link rel="stylesheet" href="{% static 'css\bootstrap.min.css' %}">
 </head>
 <body>
     <div class="container mt-5">
+    
     <!-- Inicio de la cabecera -->
     {% block cabecera %}
-        <div class="row">
-            <div class="col">
-                <div class="alert alert-primary h2">
-                    Este es el bloque de la cabecera
-                </div>
+        <div class="row mb-3">
+            <div class="col text-center">
+                <h2 class="text-primary">Sistema de Gestión - La Casa de Galio</h2>
             </div>
         </div>
     {% endblock %}
-    <!-- Fin de la cabecera -->
       
-    <!-- Inicio de la menu -->
+    <!-- Inicio del menu -->
     {% block menu %}
-        <div class="row">
-            <div class="col">
-                <div class="alert alert-success h2">
-                    Este es el bloque de la menu
-                </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 rounded px-3">
+            <a class="navbar-brand" href="/">Inicio</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <span class="nav-link text-success fw-bold">Conectado como: {{ user.username }}</span>
+                        </li>
+                        <li class="nav-item">
+                            <form method="post" action="{% url 'logout' %}" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger btn-sm mt-1 ms-2">Cerrar Sesión</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="btn btn-primary btn-sm mt-1" href="{% url 'login' %}">Iniciar Sesión</a>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
-        </div>
+        </nav>
     {% endblock %}
-    <!-- Fin de la menu -->
 
-    <!-- Inicio de la contenido -->
+    <!-- Inicio del contenido -->
     {% block contenido %}
-        <div class="row">
-            <div class="col">
-                <div class="alert alert-info h2">
-                    Este es el bloque de la contenido
-                </div>
-            </div>
-        </div>
     {% endblock %}
-    <!-- Fin de la contenido -->
+    <!-- Fin del contenido -->
 
-        <!-- Inicio de la footer -->
+    <!-- Inicio del footer -->
     {% block footer %}
-        <div class="row">
-            <div class="col">
-                <div class="alert alert-warning h2">
-                    Este es el bloque de la footer
-                </div>
+        <div class="row mt-5">
+            <div class="col text-center text-muted">
+                <hr>
+                <p>&copy; 2026 La Casa de Galio. Todos los derechos reservados.</p>
             </div>
         </div>
     {% endblock %}
-    <!-- Fin de la footer -->
 
-        <!-- Inicio de la js -->
-    {% block js %}
-        <div class="row">
-            <div class="col">
-                <div class="alert alert-danger h2">
-                    Este es el bloque de la js
-                </div>
-            </div>
-        </div>
-    {% endblock %}
-    <!-- Fin de la js -->
     </div>
     <script src="{% static 'js\bootstrap.bundle.min.js' %}"></script>
 </body>
-
 </html>

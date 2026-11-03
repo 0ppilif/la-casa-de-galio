@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from bodegaApp.models import Figura3D
 
 # Tabla 1: Categoría del PC (Ej: Gamer, Oficina, Workstation)
 class Categoria(models.Model):
@@ -20,6 +22,17 @@ class Computador(models.Model):
     precio = models.IntegerField()
     descripcion = models.TextField()
     imagen = models.CharField(max_length=200, help_text="Ejemplo: images/pc1.jpeg")
+    vendido = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nombre
+
+class Venta(models.Model):
+    computador = models.ForeignKey(Computador, on_delete=models.CASCADE, null=True, blank=True)
+    figura = models.ForeignKey(Figura3D, on_delete=models.CASCADE, null=True, blank=True)
+    vendedor = models.ForeignKey(User, on_delete=models.CASCADE)
+    fecha_venta = models.DateTimeField(auto_now_add=True)
+    
+
+    def __str__(self):
+        return f"Venta {self.id} por {self.vendedor}"

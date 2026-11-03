@@ -1,0 +1,61 @@
+{% extends 'tienda/base.html' %}
+
+{% block contenido %}
+<div class="row mb-4">
+    <div class="col">
+        <h2>Panel de Control (Dashboard)</h2>
+        <p class="text-muted">Bienvenido, {{ user.username }}. Aquí tienes tus opciones habilitadas según tu perfil.</p>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Visible para Administrador y Supervisor -->
+    {% if es_admin or es_supervisor %}
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm border-primary">
+            <div class="card-header bg-primary text-white">Operaciones de Tienda</div>
+            <div class="card-body">
+                <p>Gestión del catálogo de Computadores y Categorías.</p>
+                <a href="{% url 'listar_pcs' %}" class="btn btn-outline-primary w-100">Ver Catálogo</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm border-info">
+            <div class="card-header bg-info text-white">Operaciones de Bodega</div>
+            <div class="card-body">
+                <p>Gestión del inventario de Figuras 3D y materiales.</p>
+                <a href="{% url 'listar_figuras' %}" class="btn btn-outline-info w-100">Ver Figuras 3D</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Visible solo para Administrador -->
+    {% if es_admin %}
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm border-danger">
+            <div class="card-header bg-danger text-white">Gestión de Usuarios</div>
+            <div class="card-body">
+                <p>Control total de accesos, perfiles y permisos del sistema.</p>
+                <a href="{% url 'listar_usuarios' %}" class="btn btn-outline-danger w-100">Administrar Usuarios</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Visible para todos los perfiles (Administrativo incluido) -->
+    {% if es_admin or es_supervisor or es_administrativo %}
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm border-success">
+            <div class="card-header bg-success text-white">Registrar Venta</div>
+            <div class="card-body">
+                <p>Generar venta de equipos disponibles.</p>
+                <a href="{% url 'registrar_venta' %}" class="btn btn-outline-success w-100">Crear Transacción</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
